@@ -1,0 +1,5 @@
+extend = "../pyproject.toml"
+
+[lint.per-file-ignores]
+# Interactive notebook cells deliberately import helpers after setup completes.
+"*.ipynb" = ["E402"]

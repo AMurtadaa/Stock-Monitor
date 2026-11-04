@@ -1,5 +1,14 @@
 # Stock-Monitor
 
+## CSCI390 financial sentiment study
+
+The isolated class experiment is documented in [class_project/START_HERE.md](class_project/START_HERE.md).
+It fine-tunes DistilBERT, compares sentiment methods, and tests a matched LightGBM
+comparison with and without sentiment. Use the new
+[Colab notebook](class_project/Financial_Sentiment_Study.ipynb), rather than the earlier
+SQuAD question-answering notebook. Class outputs stay under ignored `class_artifacts/`;
+this workflow does not replace the application's deployed models or enable scheduling.
+
 A personal, **ML-powered stock research & recommendation tool**. It scans the market, **recommends when to buy and when to sell**, tracks the positions you hold (or agreed to buy), and continuously monitors news + signals to flag exits — all with a transparent explanation of _why_ — so investment research doesn't require constant manual effort.
 
 > **You execute every trade.** The tool recommends (buy _and_ sell), explains, tracks your holdings, and alerts — but it never places trades automatically; you make and execute the final call. It is a personal tool, **not** a licensed financial advisor, and **not** advice for anyone else.

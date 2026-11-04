@@ -76,3 +76,7 @@ scripts/.oci-grab.env
 
 # ---- Private local deployment notes (never commit) ----
 .local/
+
+# Isolated coursework outputs; source lives under class_project/.
+class_artifacts/
+class_bundle.zip
