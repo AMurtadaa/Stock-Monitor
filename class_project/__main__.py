@@ -49,6 +49,7 @@ def main():
     if args.command == "check":
         import importlib
 
+        print("Checking torch...", flush=True)
         import torch
 
         for dependency in [
@@ -58,7 +59,9 @@ def main():
             "gradio",
             "stock_monitor.models.scorer",
         ]:
+            print(f"Checking {dependency}...", flush=True)
             importlib.import_module(dependency)
+        print("Checking financial features and VADER...", flush=True)
         from stock_monitor.features.builder import FEATURE_COLUMNS
         from stock_monitor.sentiment import VaderAnalyzer
 
