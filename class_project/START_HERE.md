@@ -37,6 +37,9 @@ The notebook clones the class branch and creates an isolated Python environment.
 If you authorize Drive mounting, outputs are saved under
 `MyDrive/CSCI390_Financial_Sentiment/class_artifacts`.
 Your ordinary notebook packages and deployed application are not modified.
+Colab environments can lack pip even after virtual-environment creation. Setup
+explicitly installs pip into the target using the notebook interpreter's
+`pip --python` option before installing project dependencies.
 
 Expected output: package versions, GPU name, and successful tests. Installation can
 take several minutes. A new Colab session may need installation again; saved data and
