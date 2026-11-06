@@ -5,7 +5,7 @@
 The isolated class experiment is documented in [class_project/START_HERE.md](class_project/START_HERE.md).
 It fine-tunes DistilBERT, compares sentiment methods, and tests a matched LightGBM
 comparison with and without sentiment. Use the new
-[Colab notebook](class_project/Financial_Sentiment_Study.ipynb), rather than the earlier
+[Colab notebook V2](class_project/Financial_Sentiment_Study_V2.ipynb), rather than the earlier
 SQuAD question-answering notebook. Class outputs stay under ignored `class_artifacts/`;
 this workflow does not replace the application's deployed models or enable scheduling.
 

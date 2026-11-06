@@ -21,7 +21,7 @@ that dataset is not an independent unseen-data result.
 2. Choose **File > Open notebook > GitHub**.
 3. Paste `https://github.com/AMurtadaa/Stock-Monitor` and select branch
    `class/financial-sentiment-study`.
-4. Open `class_project/Financial_Sentiment_Study.ipynb`. Alternatively upload that
+4. Open `class_project/Financial_Sentiment_Study_V2.ipynb`. Alternatively upload that
    notebook from your local `stock-monitor-class/class_project` folder.
 5. Choose **Runtime > Change runtime type > GPU**.
 6. Start at section 1 and run the cells in order. Read the explanation above each cell.
@@ -44,6 +44,13 @@ explicitly installs pip into the target using the notebook interpreter's
 Expected output: package versions, GPU name, and successful tests. Installation can
 take several minutes. A new Colab session may need installation again; saved data and
 completed models on Drive are reused.
+
+Use the [clean V2 notebook](https://colab.research.google.com/github/AMurtadaa/Stock-Monitor/blob/class/financial-sentiment-study/class_project/Financial_Sentiment_Study_V2.ipynb).
+The original notebook is preserved, including your saved Colab work. V2 uses one
+runner from `notebook_runtime.py`, a separate code checkout and environment, and
+the same Drive artifact folder. Do not copy repair cells into V2. It prints
+START/PASS/FAILED, a heartbeat during silence, and an explicit SMOKE TEST PASSED
+before allowing full training. Logs are under `class_artifacts/setup_logs`.
 
 ### Dataset preparation
 
