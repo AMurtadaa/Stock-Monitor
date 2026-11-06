@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 
+from class_project.checkpoint_recovery import prepare_checkpoint_run
 from class_project.common import (
     BASE_MODEL,
     LABELS,
@@ -47,13 +48,13 @@ def train(seed=42, smoke=False):
         TrainingArguments,
         set_seed,
     )
-    from transformers.trainer_utils import get_last_checkpoint
 
     set_seed(seed)
     run = output_path("nlp", "smoke" if smoke else f"seed-{seed}")
     if (run / "manifest.json").exists():
         print("Completed run already exists; reusing", run)
         return
+    checkpoint_output, previous = prepare_checkpoint_run(run / "checkpoints")
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     train_rows, dev_rows = load_split("train"), load_split("development")
     if smoke:
@@ -74,7 +75,7 @@ def train(seed=42, smoke=False):
         label2id={name: i for i, name in enumerate(LABELS)},
     )
     args = TrainingArguments(
-        output_dir=str(run / "checkpoints"),
+        output_dir=str(checkpoint_output),
         learning_rate=2e-5,
         per_device_train_batch_size=16,
         per_device_eval_batch_size=32,
@@ -105,9 +106,6 @@ def train(seed=42, smoke=False):
         compute_metrics=lambda p: {
             "macro_f1": classification_metrics(p.label_ids, p.predictions.argmax(-1))["macro_f1"]
         },
-    )
-    previous = (
-        get_last_checkpoint(str(run / "checkpoints")) if (run / "checkpoints").exists() else None
     )
     started = time.perf_counter()
     result = trainer.train(resume_from_checkpoint=previous)
@@ -177,9 +175,7 @@ def evaluate(smoke=False, finbert=False):
             output_path("dataset", "manifest.json").read_bytes()
         ):
             raise ValueError("Model was trained with a different frozen dataset split.")
-        if manifest["checkpoint_sha256"] != digest(
-            (run / "model/model.safetensors").read_bytes()
-        ):
+        if manifest["checkpoint_sha256"] != digest((run / "model/model.safetensors").read_bytes()):
             raise ValueError("Saved checkpoint changed after training.")
     results = {"scope": "development smoke only" if smoke else "held-out test", "models": {}}
     predictions = {"vader": vader_predictions(texts)}

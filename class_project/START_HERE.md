@@ -52,6 +52,14 @@ the same Drive artifact folder. Do not copy repair cells into V2. It prints
 START/PASS/FAILED, a heartbeat during silence, and an explicit SMOKE TEST PASSED
 before allowing full training. Logs are under `class_artifacts/setup_logs`.
 
+Interrupted training can leave a `checkpoint-*` folder without all its files.
+Recovery checks trainer/config JSON, weights, optimizer, scheduler and random-state
+files before selecting a saved step. Incomplete saves are skipped; the newest
+eligible checkpoint is resumed, or that seed restarts from the base model. New
+attempts use a separate checkpoint output folder so interrupted files stay intact.
+Completed seed manifests are still reused. To load a published code repair, rerun
+V2 sections 1–5 in order; section 1 updates the checkout and saved data are reused.
+
 ### Dataset preparation
 
 Financial PhraseBank contains human-labeled financial sentences. We use the

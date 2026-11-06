@@ -58,3 +58,12 @@ Reuse is explicitly printed. Checkpoint and dataset checksums are verified.
 This was not a new three-seed training run and not a Colab GPU execution.
 Drive authorization, current Colab installation and full training still require
 running V2 in the user's GPU runtime. No final experimental metrics are invented.
+
+Checkpoint recovery regression checks cover a missing `trainer_state.json`, missing
+optimizer, malformed JSON, an unavailable best-model reference, and saves inside
+previous recovery attempts. A real tiny DistilBERT Trainer test saves two steps,
+adds an incomplete newer folder, resumes the complete step into a fresh directory,
+and verifies step three finishes without changing the incomplete save. File checks
+are structural: they do not prove arbitrary binary files are uncorrupted.
+After the recovery changes, all 21 local tests pass, including that real Trainer
+resume. Full Colab GPU training remains to be completed in the user's session.

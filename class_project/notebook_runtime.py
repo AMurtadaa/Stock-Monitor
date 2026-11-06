@@ -171,7 +171,10 @@ class NotebookSession:
         self._say("SETUP PASSED. Continue to dataset preparation.")
 
     def run(self, *args):
-        self.command([self.python, "-u", "-m", "class_project", *args], label=" ".join(args[:2]))
+        count = 3 if args[:2] == ("train", "--seed") else 2
+        self.command(
+            [self.python, "-u", "-m", "class_project", *args], label=" ".join(args[:count])
+        )
 
     def smoke(self):
         self._say("Smoke test: two training steps, save/reload, development scoring.")
