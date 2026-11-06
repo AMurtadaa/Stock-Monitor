@@ -134,6 +134,9 @@ the final interpretation and format the report after reviewing actual results.
 
 - Red traceback: stop at that cell, copy the last error and the cell name.
 - No GPU: select a GPU runtime; do not run full training accidentally on CPU.
+- Invalid `matplotlib_inline` backend: run `os.environ["MPLBACKEND"] = "Agg"`
+  in the notebook kernel, then rerun setup. Class subprocesses save charts as PNGs
+  and do not need Colab's inline plotting backend. The updated source sets this too.
 - Missing model: complete training before evaluation; don't switch to a fallback.
 - Missing news: finish the news step or supply an existing archive.
 - Weak coverage: share coverage.json; don't treat all-zero sentiment as a result.

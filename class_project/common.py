@@ -17,6 +17,9 @@ BASE_MODEL = "distilbert/distilbert-base-uncased"
 PANEL = ["AAPL", "MSFT", "INTC", "CSCO", "JPM", "BAC", "XOM", "CVX", "JNJ", "PFE", "CAT", "BA"]
 os.environ.setdefault("USE_TF", "0")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+# Colab exports a notebook-only backend to child processes. Research commands
+# save plots to files and must not inherit that kernel-specific backend.
+os.environ["MPLBACKEND"] = "Agg"
 
 
 def digest(data: bytes) -> str:
