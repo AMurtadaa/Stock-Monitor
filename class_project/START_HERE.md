@@ -1,5 +1,10 @@
 # Start here: your financial sentiment class project
 
+The demo now includes **Sentence analysis + weights**, an experimental view of
+individual sentence scores and their overall weighted contribution. See
+[the step-by-step guide](SENTENCE_ANALYSIS.md) for the formula, controls,
+limitations and separate human-evaluation plan. No retraining is required.
+
 ## What this project is
 
 You are studying **financial sentiment classification** and one small financial

@@ -43,6 +43,13 @@ def test_named_checkpoint_batch_reload_truncation(tmp_path):
         single["probabilities"]["positive"] - single["probabilities"]["negative"]
     )
     assert set(batch[1]["probabilities"]) == {"positive", "negative", "neutral"}
+    from class_project.sentence_analysis import analyze_document
+
+    passage = analyze_document(reader, "company profit. falls.")
+    assert len(passage["sentences"]) == 2
+    assert sum(row["contribution"] for row in passage["sentences"]) == pytest.approx(
+        passage["overall"]["score"]
+    )
     assert reader.score_batch([]) == []
     with pytest.raises(ValueError):
         reader.score(" ")

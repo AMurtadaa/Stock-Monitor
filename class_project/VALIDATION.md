@@ -67,3 +67,32 @@ and verifies step three finishes without changing the incomplete save. File chec
 are structural: they do not prove arbitrary binary files are uncorrupted.
 After the recovery changes, all 21 local tests pass, including that real Trainer
 resume. Full Colab GPU training remains to be completed in the user's session.
+
+## Sentence decomposition and weighting extension
+
+The earlier pending-training statements describe the state at those checks. The
+user's subsequently saved Colab notebook shows all three full training runs,
+held-out evaluation and scoring of 52,255 historical headlines completed. This was
+observed in saved outputs, not reproduced locally. The original model metrics are
+not modified by the following demo extension.
+
+The extension adds offline heuristic segmentation, equal and literal-target
+weights, explicit manual multipliers, normalized contributions, opposing-evidence
+flags, duplicate-unit handling and truncation warnings. Tests cover synthetic
+known-score arithmetic, invalid weights, target boundaries, segmentation and
+duplicates. The Gradio app is constructed with actual Gradio components and its
+callbacks exercised using a fake analyzer; a separate tiny actual DistilBERT
+integration checks the neural-model-to-aggregation path. No download or training
+of a new production checkpoint is needed for this extension.
+
+These are engineering checks, not accuracy evidence. The weighting heuristics
+have not been evaluated on human-labeled mixed passages or financial outcomes.
+`SENTENCE_ANALYSIS.md` documents the separate evaluation needed before claiming
+improvement. Neither archived financial features nor benchmark artifacts are
+rewritten by this demo.
+
+All 28 local tests pass after this extension. Gradio construction/callback tests
+were run outside the Windows sandbox because its socket restrictions blocked the
+event loop's local socket pair. The test patches server launch: no public demo
+server or trading action is started. Ruff passes for the maintained class code
+(excluding the preserved original notebook).
